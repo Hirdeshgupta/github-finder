@@ -1,8 +1,9 @@
-import React,{Fragment} from 'react';;
+import React,{Fragment} from 'react';
+import Navbar from './Componemts/layouts/Navbar';
 function App() {
   return (
     <Fragment>
-      <h1>React app </h1>
+      <Navbar/>
     </Fragment>
   );
 }
