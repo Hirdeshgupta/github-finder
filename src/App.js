@@ -5,15 +5,19 @@ import {BrowserRouter as Router ,Switch , Route } from "react-router-dom";
 import axios from "axios"
 import Users from './Componemts/Users';
 import About from "./Componemts/About"
-import User from "./Componemts/User"
+import User from "./Componemts/User";
+import  Preloader  from "./Componemts/Preloader"
 const App = ()=> {
   const [users,setUsers] = useState([]);
+  const [is_loading,setLoading] = useState(false);
   const [cleared,setCleared] = useState(true);
   const getUser = async (query)=>{
     try {
+      setLoading(true);
       const response = await axios.get(`https://api.github.com/search/users?q=${query}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
       setCleared(false);
       setUsers(response.data.items);
+      setLoading(false)
     } catch (error) {
       console.error(error);
     }
@@ -29,10 +33,10 @@ const App = ()=> {
         <div className="container">
         <Switch>
           <Route exact path="/" render={(props)=>
-              <Fragment>
-                <Search getUser ={getUser} clearEvent ={clearEvent} cleared={cleared}/>
-              <Users users={users} />
-              </Fragment>
+            <Fragment>
+            <Search getUser ={getUser} clearEvent ={clearEvent} cleared={cleared}/>
+            {is_loading ? <Preloader /> : <Users users={users} />}
+          </Fragment>
           } />
           <Route  exact path="/about" component={About} />
           <Route exact path="/user/:name" render={(props)=>

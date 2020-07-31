@@ -1,17 +1,21 @@
 import React, {Fragment,useState,useEffect} from 'react'
 import {Link } from "react-router-dom"
-import axios from "axios"
+import axios from "axios";
+import Preloader from "./Preloader"
 const User =({match:{params},})=> {
     const [userDetails,setUserDetails] = useState({});
     const [repos,setRepos] = useState([]);
+    const [is_loading,setLoading] = useState(false);
     useEffect(() => {
         getRepos();
         getDetails();
     }, [])
     const getDetails= async()=>{
         try {
+            setLoading(true);
             const response = await axios.get(`https://api.github.com/users/${params.name}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
             setUserDetails(response.data)
+            setLoading(false);
           } catch (error) {
             console.error(error);
           }
@@ -35,6 +39,7 @@ const User =({match:{params},})=> {
             )
         } 
         return (
+            is_loading ? <Preloader /> :(
             <Fragment>
                 <div className="row mt-4 align-ite" >
 
@@ -87,6 +92,7 @@ const User =({match:{params},})=> {
                     {latestRepos}
                 </div>
                 </Fragment>
+            )
         )
 }
 export default User
