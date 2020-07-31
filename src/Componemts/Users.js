@@ -1,8 +1,6 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import {Link} from "react-router-dom"
-export class Users extends Component {
-    render() {
-        const {users} = this.props
+const Users =({users})=> {
         return (
             <div className="row justify-content-around">
                     {
@@ -32,7 +30,6 @@ export class Users extends Component {
 
 
         )
-    }
 }
 
 export default Users
