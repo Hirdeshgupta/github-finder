@@ -12,8 +12,16 @@ const {
     SET_REPOS,
     SET_IS_BLANK
 } = types;
-
-
+let githubClientId;
+let githubClientSecret;
+if(process.env.NODE_ENV !=="production"){
+    githubClientId=process.env.REACT_APP_GITHUB_CLIENT_ID;
+    githubClientSecret= process.env.REACT_APP_GITHUB_CLIENT_SECRET;
+}
+else{
+    githubClientId=process.env.GITHUB_CLIENT_ID;
+    githubClientSecret= process.env.GITHUB_CLIENT_SECRET;
+}
 const GithubState  = props =>{
 const initialState = {
     users:[],
@@ -29,7 +37,7 @@ const [state ,dispatch] = useReducer(GithubReducer,initialState);
 const getUser = async (query)=>{
     try {
       dispatch({type:SET_LOADING})
-      const response = await axios.get(`https://api.github.com/search/users?q=${query}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+      const response = await axios.get(`https://api.github.com/search/users?q=${query}&client_id=${githubClientId}&client_secret=${githubClientSecret}`);
       dispatch({type:SET_CLEARED,payload:false})
       dispatch({type:SET_USERS,payload:response.data.items})
     } catch (error) {
@@ -50,7 +58,7 @@ const setSearch = x=>{
 const getDetails= async(params)=>{
     try {
         dispatch({type:SET_LOADING})
-        const response = await axios.get(`https://api.github.com/users/${params}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+        const response = await axios.get(`https://api.github.com/users/${params}?client_id=${githubClientId}&client_secret=${githubClientSecret}`);
         dispatch({type:SET_USER_DETAILS,payload:response.data})
       } catch (error) {
         console.error(error);
@@ -59,7 +67,7 @@ const getDetails= async(params)=>{
 
 const getRepos =async(params)=>{
     try {
-        const response = await axios.get(`https://api.github.com/users/${params}/repos?sort=created&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);
+        const response = await axios.get(`https://api.github.com/users/${params}/repos?sort=created&client_id=${githubClientId}&client_secret=${githubClientSecret}`);
         dispatch({type:SET_REPOS,payload:response.data})
       } catch (error) {
         console.error(error);
