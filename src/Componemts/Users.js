@@ -1,9 +1,14 @@
-import React from 'react'
-import {Link} from "react-router-dom"
-const Users =({users})=> {
+import React ,{useContext} from 'react'
+import {Link} from "react-router-dom";
+import githubContext from "../context/githubContext"
+import Preloader from "./Preloader"
+const Users =()=> {
+    const {users,is_loading} = useContext(githubContext);
+    console.log(users)
         return (
-            <div className="row justify-content-around">
-                    {
+            is_loading ? <Preloader/> : (
+             <div className="row justify-content-around">
+                    { 
                  users.map(x=>
                     <div className="col-lg-4 col-sm-6 col-10">
                     <div className="card border-secondary my-5 " style={{maxWidth: "20rem"}}>
@@ -27,9 +32,7 @@ const Users =({users})=> {
                     }
 
             </div>
-
-
+            )
         )
 }
-
 export default Users

@@ -1,7 +1,7 @@
-import React, {useState } from 'react'
- const  Search = ({getUser,cleared,clearEvent})=> {
-     const [search,setSearch] = useState("");
-     const [is_blank,setIs_blank] = useState(false);
+import React, {useContext } from 'react';
+import githubContext from "../context/githubContext";
+ const  Search = ()=> {
+    const {cleared,getUser,clearEvent,search,setSearch,is_blank,setIs_blank} =useContext(githubContext);
      const getUser1 = (e)=>{
         e.preventDefault()
         if(search==undefined || search=="" ){
@@ -41,5 +41,4 @@ import React, {useState } from 'react'
                     </div>
         )
 }
-
 export default Search
