@@ -11,11 +11,13 @@ const User =({match:{params},})=> {
         const latestRepos = [];
         for(let i=0;i<5;i++){
             latestRepos.push(
-                <div className="col-12">
-                <div className="card border-light mb-3">
-                    <h5 className="py-2 pl-2 "><a className="text-white" href={repos[0] && repos[i].html_url }>{repos[0] && repos[i].name }</a></h5>
+                repos[i] && (
+                    <div className="col-12">
+                    <div className="card border-light mb-3">
+                        <h5 className="py-2 pl-2 "><a className="text-white" href={repos[i].html_url }>{ repos[i].name }</a></h5>
+                    </div>
                 </div>
-            </div>
+                )
             )
         } 
         return (
