@@ -8,9 +8,9 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://drive.google.com/uc?id=1_JvwtRizR4kbXz3Mg8aIPFSUOl-MRscR" width="400" height="400/">
+<img src="https://drive.google.com/uc?id=1_JvwtRizR4kbXz3Mg8aIPFSUOl-MRscR" width="800" height="400/">
 
-<img src="https://drive.google.com/uc?id=1K81e9HgbUugipY3JAEuM4nEieZTzGwR3" alt="project-screenshot" width="400" height="400/">
+<img src="https://drive.google.com/uc?id=1K81e9HgbUugipY3JAEuM4nEieZTzGwR3" alt="project-screenshot" width="800" height="400/">
 
   
   
